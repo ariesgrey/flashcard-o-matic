@@ -4,9 +4,10 @@ import Breadcrumb from "../../Layout/Breadcrumb";
 import CardList from "./CardList";
 import { readDeck } from "../../utils/api";
 
-function Deck({ deck, setDeck, handleDeleteDeck }) {
+function Deck({ deck, setDeck, handleDeleteDeck, cards, setCards, handleDeleteCard }) {
 	const { deckId } = useParams();
 
+	// Load deck and use state
 	useEffect(() => {
 		async function loadDeck() {
 			const loadedDeck = await readDeck(deckId);
@@ -15,8 +16,30 @@ function Deck({ deck, setDeck, handleDeleteDeck }) {
 		loadDeck();
 	}, [deckId]);
 
+	// Breadcrumb params
 	const crumbs = [deck.name];
 	const links = [];
+
+	// Load cards in deck, only run if deck isn't empty
+	// Does using 'deck.cards' avoid needing useEffect? Can just use for-loop?
+	if (deck.cards.length !== 0) {
+		useEffect(() => {
+			setCards([]);
+			const abortController = new AbortController();
+
+			async function loadCards() {
+				try {
+					
+				} catch (error) {
+					if (error.name !== "AbortError") {
+						throw error;
+					}
+				}
+			}
+		loadCards();
+		return () => abortController.abort();
+		})
+	}
 
 	return (
 		<>
@@ -36,6 +59,11 @@ function Deck({ deck, setDeck, handleDeleteDeck }) {
 								<i className="bi bi-book"></i>&nbsp;Study
 							</button>
 						</Link>
+						<Link className="card-link" to={`/decks/${deckId}/cards/new`}>
+							<button type="button" className="btn btn-success">
+								<i className="bi bi-plus-circle"></i>&nbsp;Add Cards
+							</button>
+						</Link>
 						<button
 							type="button"
 							className="btn btn-danger float-end"
@@ -46,7 +74,14 @@ function Deck({ deck, setDeck, handleDeleteDeck }) {
 					</div>
 				</div>
 			</div>
-			<CardList />
+			<div className="my-3">
+				<h2>Cards</h2>
+			</div>
+			{deck.cards.length === 0 ? (
+				<p>This deck is currently empty. Click "Add Cards" above to create cards for this deck</p> 
+			) : (
+				<CardList cards={cards} handleDeleteCards={handleDeleteCard} />
+			)}
 		</>
 	);
 }
