@@ -1,10 +1,11 @@
 import CardView from "./CardView";
 
-function CardList() {
+function CardList({ cards, handleDeleteCard }) {
 	return (
 		<>
-			<h1>CardList</h1>
-			<CardView />
+			{cards.map((card) => (
+				<CardView card={card} handleDeleteCard={handleDeleteCard} />
+			))}
 		</>
 	);
 }
