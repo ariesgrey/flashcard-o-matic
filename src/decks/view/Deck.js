@@ -4,42 +4,45 @@ import Breadcrumb from "../../Layout/Breadcrumb";
 import CardList from "./CardList";
 import { readDeck } from "../../utils/api";
 
-function Deck({ deck, setDeck, handleDeleteDeck, cards, setCards, handleDeleteCard }) {
+function Deck({
+	deck,
+	setDeck,
+	handleDeleteDeck,
+	cards,
+	setCards,
+	handleDeleteCard,
+}) {
 	const { deckId } = useParams();
-
-	// Load deck and use state
-	useEffect(() => {
-		async function loadDeck() {
-			const loadedDeck = await readDeck(deckId);
-			setDeck(loadedDeck);
-		}
-		loadDeck();
-	}, [deckId]);
 
 	// Breadcrumb params
 	const crumbs = [deck.name];
 	const links = [];
 
-	// Load cards in deck, only run if deck isn't empty
-	// Does using 'deck.cards' avoid needing useEffect? Can just use for-loop?
-	if (deck.cards.length !== 0) {
-		useEffect(() => {
-			setCards([]);
-			const abortController = new AbortController();
+	// Load deck
+	useEffect(() => {
+		setDeck({});
+		const abortController = new AbortController();
 
-			async function loadCards() {
-				try {
-					
-				} catch (error) {
-					if (error.name !== "AbortError") {
-						throw error;
-					}
+		async function loadDeck() {
+			try {
+				const loadedDeck = await readDeck(deckId);
+				setDeck(loadedDeck);
+			} catch (error) {
+				if (error.name !== "AbortError") {
+					throw error;
 				}
 			}
-		loadCards();
+		}
+		loadDeck();
 		return () => abortController.abort();
-		})
-	}
+	}, [deckId, setDeck]);
+
+	// Add cards from deck to 'cards' once deck is loaded
+	useEffect(() => {
+		if (deck) {
+			setCards(deck.cards);
+		}
+	}, [deck, cards, setCards]);
 
 	return (
 		<>
@@ -75,12 +78,13 @@ function Deck({ deck, setDeck, handleDeleteDeck, cards, setCards, handleDeleteCa
 				</div>
 			</div>
 			<div className="my-3">
-				<h2>Cards</h2>
+				<h1>Cards</h1>
 			</div>
-			{deck.cards.length === 0 ? (
-				<p>This deck is currently empty. Click "Add Cards" above to create cards for this deck</p> 
+			{/* Need to wait for async functions to finish loading deck and cards */}
+			{deck && cards ? (
+				<CardList cards={cards} handleDeleteCard={handleDeleteCard} />
 			) : (
-				<CardList cards={cards} handleDeleteCards={handleDeleteCard} />
+				<p>Loading deck...</p>
 			)}
 		</>
 	);
