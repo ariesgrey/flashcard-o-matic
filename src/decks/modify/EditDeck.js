@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { readDeck, updateDeck } from "../../utils/api";
 import Breadcrumb from "../../Layout/Breadcrumb";
@@ -6,15 +6,27 @@ import DeckForm from "./DeckForm";
 
 function EditDeck({ deck, setDeck, formData, setFormData, handleChange }) {
 	const { deckId } = useParams();
+	const history = useHistory();
 
 	useEffect(() => {
+		setDeck({});
+		const abortController = new AbortController();
+
 		async function loadDeck() {
-			const loadedDeck = await readDeck(deckId);
-			setDeck(loadedDeck);
+			try {
+				const loadedDeck = await readDeck(deckId);
+				console.log(loadedDeck);
+				setDeck(loadedDeck);
+			} catch (error) {
+				if (error.name !== "AbortError") {
+					throw error;
+				}
+			}
 		}
 		loadDeck();
-	}, [deckId]);
-	
+		return () => abortController.abort();
+	}, [deckId, setDeck]);
+
 	const crumbs = [deck.name, "Edit Deck"];
 	const links = [`/decks/${deckId}`];
 
@@ -42,9 +54,10 @@ function EditDeck({ deck, setDeck, formData, setFormData, handleChange }) {
 					throw error;
 				}
 			}
-		editDeck();
 		}
-	
+		editDeck();
+	};
+
 	return (
 		<>
 			<Breadcrumb crumbs={crumbs} links={links} />

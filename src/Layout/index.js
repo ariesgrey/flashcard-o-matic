@@ -36,7 +36,6 @@ function Layout() {
 				}
 			}
 		}
-
 		loadDecks();
 		return () => abortController.abort();
 	}, []);
@@ -72,10 +71,7 @@ function Layout() {
 			<div className="container">
 				<Switch>
 					<Route exact path={"/"}>
-						<Home
-							decks={decks}
-							handleDeleteDeck={handleDeleteDeck}
-						/>
+						<Home decks={decks} handleDeleteDeck={handleDeleteDeck} />
 					</Route>
 					<Route path={"/decks/new"}>
 						<CreateDeck

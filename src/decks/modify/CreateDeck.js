@@ -3,12 +3,12 @@ import { createDeck } from "../../utils/api";
 import Breadcrumb from "../../Layout/Breadcrumb";
 import DeckForm from "./DeckForm";
 
-function CreateDeck({ formData, setFormData, changeHandler }) {
+function CreateDeck({ formData, setFormData, handleChange }) {
 	const crumbs = ["Create Deck"];
 	const links = [];
 
 	const history = useHistory();
-	
+
 	const initialFormState = {
 		name: "",
 		description: "",

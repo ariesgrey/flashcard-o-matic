@@ -9,7 +9,7 @@ function Breadcrumb({ crumbs, links }) {
 				<nav aria-label="breadcrumb">
 					<ol className="breadcrumb">
 						{/* 'Home' included in every instance */}
-						<li className="breadcrumb-item fw-semibold">
+						<li key="0" className="breadcrumb-item fw-semibold">
 							<Link style={{ textDecoration: "none" }} to="/">
 								<i className="bi bi-house-door-fill"></i>
 								&nbsp;Home
@@ -19,6 +19,7 @@ function Breadcrumb({ crumbs, links }) {
 							if (index === crumbs.length - 1) {
 								return (
 									<li
+										key={index}
 										className="breadcrumb-item fw-semibold active"
 										aria-current="page">
 										{crumb}

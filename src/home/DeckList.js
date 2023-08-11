@@ -3,8 +3,8 @@ import DeckView from "./DeckView";
 function DeckList({ decks, handleDeleteDeck }) {
 	return (
 		<>
-			{decks.map((deck) => (
-				<DeckView deck={deck} handleDeleteDeck={handleDeleteDeck} />
+			{decks.map((deck, index) => (
+				<DeckView key={index} deck={deck} handleDeleteDeck={handleDeleteDeck} />
 			))}
 		</>
 	);
