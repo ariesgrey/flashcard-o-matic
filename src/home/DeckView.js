@@ -1,17 +1,8 @@
+import React from "react";
 import { Link } from "react-router-dom";
-import { deleteDeck } from "../utils/api";
 
-function DeckView({ deck }) {
+function DeckView({ deck, handleDeleteDeck }) {
 	const { id, name, description } = deck;
-
-	const handleDelete = async ({ target }) => {
-		const deleteMessage =
-			"Delete this deck?\nYou will not be able to recover it.";
-		if (window.confirm(deleteMessage)) {
-			await deleteDeck(id);
-			window.location.reload();
-		}
-	};
 
 	return (
 		<div className="card position-relative mb-3">
@@ -37,8 +28,9 @@ function DeckView({ deck }) {
 					<button
 						type="button"
 						className="btn btn-danger float-end"
-						onClick={handleDelete}>
-						<i className="bi bi-trash3"></i>
+						id={id}
+						onClick={handleDeleteDeck}>
+						<i className="bi bi-trash3" id={id}></i>
 					</button>
 				</div>
 			</div>

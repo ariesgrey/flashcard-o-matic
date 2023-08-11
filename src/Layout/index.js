@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
-import { listDecks } from "../utils/api";
+import { Route, Switch, useHistory } from "react-router-dom";
+import { listDecks, deleteDeck } from "../utils/api";
 import Header from "./Header";
 import Home from "../home/Home";
 import EditCard from "../cards/EditCard";
@@ -13,6 +13,7 @@ import NotFound from "./NotFound";
 
 function Layout() {
 	const [decks, setDecks] = useState([]);
+	const history = useHistory();
 
 	// Load decks
 	useEffect(() => {
@@ -34,13 +35,27 @@ function Layout() {
 		return () => abortController.abort();
 	}, []);
 
+	// Delete deck handler
+	const handleDeleteDeck = async ({ target }) => {
+		console.log(target);
+		const deckId = target.getAttribute("id");
+		console.log(deckId);
+		const deleteMessage =
+			"Delete this deck?\nYou will not be able to recover it.";
+		if (window.confirm(deleteMessage)) {
+			await deleteDeck(deckId);
+			history.push("/");
+			window.location.reload();
+		}
+	};
+
 	return (
 		<>
 			<Header />
 			<div className="container">
 				<Switch>
 					<Route exact path={"/"}>
-						<Home decks={decks} />
+						<Home decks={decks} handleDeleteDeck={handleDeleteDeck} />
 					</Route>
 					<Route path={"/decks/new"}>
 						<CreateDeck />
@@ -51,14 +66,14 @@ function Layout() {
 					<Route path={"/decks/:deckId/cards/new"}>
 						<AddCard />
 					</Route>
-					<Route path={"/decks/:deckId/study"}>
-						<Study />
-					</Route>
 					<Route path={"/decks/:deckId/edit"}>
 						<EditDeck />
 					</Route>
+					<Route path={"/decks/:deckId/study"}>
+						<Study />
+					</Route>
 					<Route path={"/decks/:deckId"}>
-						<Deck />
+						<Deck handleDeleteDeck={handleDeleteDeck} />
 					</Route>
 					<Route>
 						<NotFound />

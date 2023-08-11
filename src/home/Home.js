@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import DeckList from "./DeckList";
 
-function Home({ decks }) {
+function Home({ decks, handleDeleteDeck }) {
 	return (
 		<>
 			<div className="mb-3">
@@ -12,7 +12,7 @@ function Home({ decks }) {
 					</button>
 				</Link>
 			</div>
-			<DeckList decks={decks} />
+			<DeckList decks={decks} handleDeleteDeck={handleDeleteDeck} />
 		</>
 	);
 }

@@ -28,6 +28,8 @@ function CreateDeck() {
 			try {
 				const newDeck = await createDeck(formData);
 				history.push(`/decks/${newDeck.id}`);
+				// Force reload so new deck will appear if you click 'Home' breadcrumb
+				window.location.reload();
 			} catch (error) {
 				if (error.name !== "AbortError") {
 					throw error;

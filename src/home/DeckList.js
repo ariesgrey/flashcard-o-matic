@@ -1,10 +1,10 @@
 import DeckView from "./DeckView";
 
-function DeckList({ decks }) {
+function DeckList({ decks, handleDeleteDeck }) {
 	return (
 		<>
 			{decks.map((deck) => (
-				<DeckView deck={deck} />
+				<DeckView deck={deck} handleDeleteDeck={handleDeleteDeck} />
 			))}
 		</>
 	);
