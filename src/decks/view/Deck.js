@@ -4,8 +4,7 @@ import Breadcrumb from "../../Layout/Breadcrumb";
 import CardList from "./CardList";
 import { readDeck } from "../../utils/api";
 
-function Deck({ handleDeleteDeck }) {
-	const [deck, setDeck] = useState({});
+function Deck({ deck, setDeck, handleDeleteDeck }) {
 	const { deckId } = useParams();
 
 	useEffect(() => {
