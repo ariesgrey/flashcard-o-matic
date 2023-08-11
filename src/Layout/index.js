@@ -12,10 +12,16 @@ import CreateDeck from "../decks/modify/CreateDeck";
 import NotFound from "./NotFound";
 
 function Layout() {
-	const [decks, setDecks] = useState([]);
 	const history = useHistory();
 
-	// Load decks
+	// Individual deck state - 'Deck', 'EditDeck'
+	const [deck, setDeck] = useState({});
+
+	// Cards within a deck state - 'Deck',
+	const [cards, setCards] = useState([]);
+
+	// Load all decks - 'Home'
+	const [decks, setDecks] = useState([]);
 	useEffect(() => {
 		setDecks([]);
 		const abortController = new AbortController();
@@ -35,11 +41,19 @@ function Layout() {
 		return () => abortController.abort();
 	}, []);
 
-	// Delete deck handler
+	// Change handler for deckForm - 'CreateDeck', 'EditDeck'
+	// May be able to also use for cardForm? Otherwise need to rename
+	const [formData, setFormData] = useState([]);
+	const handleChange = ({ target }) => {
+		setFormData({
+			...formData,
+			[target.name]: target.value,
+		});
+	};
+
+	// Delete deck handler - 'Home', 'Deck'
 	const handleDeleteDeck = async ({ target }) => {
-		console.log(target);
 		const deckId = target.getAttribute("id");
-		console.log(deckId);
 		const deleteMessage =
 			"Delete this deck?\nYou will not be able to recover it.";
 		if (window.confirm(deleteMessage)) {
@@ -49,16 +63,26 @@ function Layout() {
 		}
 	};
 
+	// Delete card handler - 'Deck'
+	const handleDeleteCard = async ({ target }) => {};
+
 	return (
 		<>
 			<Header />
 			<div className="container">
 				<Switch>
 					<Route exact path={"/"}>
-						<Home decks={decks} handleDeleteDeck={handleDeleteDeck} />
+						<Home
+							decks={decks}
+							handleDeleteDeck={handleDeleteDeck}
+						/>
 					</Route>
 					<Route path={"/decks/new"}>
-						<CreateDeck />
+						<CreateDeck
+							formData={formData}
+							setFormData={setFormData}
+							handleChange={handleChange}
+						/>
 					</Route>
 					<Route path={"/decks/:deckId/cards/:cardId/edit"}>
 						<EditCard />
@@ -67,13 +91,26 @@ function Layout() {
 						<AddCard />
 					</Route>
 					<Route path={"/decks/:deckId/edit"}>
-						<EditDeck />
+						<EditDeck
+							deck={deck}
+							setDeck={setDeck}
+							formData={formData}
+							setFormData={setFormData}
+							handleChange={handleChange}
+						/>
 					</Route>
 					<Route path={"/decks/:deckId/study"}>
 						<Study />
 					</Route>
 					<Route path={"/decks/:deckId"}>
-						<Deck handleDeleteDeck={handleDeleteDeck} />
+						<Deck
+							deck={deck}
+							setDeck={setDeck}
+							handleDeleteDeck={handleDeleteDeck}
+							cards={cards}
+							setCards={setCards}
+							handleDeleteCard={handleDeleteCard}
+						/>
 					</Route>
 					<Route>
 						<NotFound />
