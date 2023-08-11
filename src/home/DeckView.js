@@ -14,10 +14,12 @@ function DeckView({ deck }) {
 	};
 
 	return (
-		<div className="card position-relative">
+		<div className="card position-relative mb-3">
 			<div className="card-body">
 				<h5 className="card-title">{name}</h5>
-				<p className="position-absolute top-0 end-0" style={{ padding: 10 }}>
+				<p
+					className="position-absolute top-0 end-0"
+					style={{ paddingRight: 16, paddingTop: 10 }}>
 					{deck.cards.length} cards
 				</p>
 				<p className="card-text">{description}</p>

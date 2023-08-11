@@ -4,12 +4,14 @@ import DeckList from "./DeckList";
 function Home({ decks }) {
 	return (
 		<>
-			<Link to="/decks/new">
-				<button type="button" className="btn btn-secondary">
-					<i class="bi bi-plus-circle"></i>
-					&nbsp;Create Deck
-				</button>
-			</Link>
+			<div className="mb-3">
+				<Link to="/decks/new">
+					<button type="button" className="btn btn-success">
+						<i class="bi bi-plus-circle"></i>
+						&nbsp;Create Deck
+					</button>
+				</Link>
+			</div>
 			<DeckList decks={decks} />
 		</>
 	);

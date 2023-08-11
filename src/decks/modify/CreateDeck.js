@@ -1,10 +1,53 @@
+import { useState } from "react";
+import { useHistory } from "react-router-dom";
+import { createDeck } from "../../utils/api";
+import Breadcrumb from "../../Layout/Breadcrumb";
 import DeckForm from "./DeckForm";
 
 function CreateDeck() {
+	const crumbs = ["Create Deck"];
+	const links = [];
+
+	const history = useHistory();
+	const initialFormState = {
+		name: "",
+		description: "",
+	};
+	const [formData, setFormData] = useState(initialFormState);
+
+	const handleChange = ({ target }) => {
+		setFormData({
+			...formData,
+			[target.name]: target.value,
+		});
+	};
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		async function addDeck() {
+			try {
+				const newDeck = await createDeck(formData);
+				history.push(`/decks/${newDeck.id}`);
+			} catch (error) {
+				if (error.name !== "AbortError") {
+					throw error;
+				}
+			}
+		}
+		addDeck();
+	};
+
 	return (
 		<>
-			<h1>CreateDeck</h1>
-			<DeckForm />
+			<Breadcrumb crumbs={crumbs} links={links} />
+			<div className="my-3">
+				<h1>Create Deck</h1>
+			</div>
+			<DeckForm
+				formData={formData}
+				handleChange={handleChange}
+				handleSubmit={handleSubmit}
+			/>
 		</>
 	);
 }
