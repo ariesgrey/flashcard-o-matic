@@ -9,7 +9,7 @@ function Breadcrumb({ crumbs, links }) {
 						{/* 'Home' included in every instance */}
 						<li className="breadcrumb-item">
 							<Link to="/">
-								<i class="bi bi-house-fill"></i>Home
+								<i className="bi bi-house-door"></i>&nbsp;Home
 							</Link>
 						</li>
 						{crumbs.map((crumb, index) => {

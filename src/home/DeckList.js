@@ -1,10 +1,11 @@
 import DeckView from "./DeckView";
 
-function DeckList() {
+function DeckList({ decks }) {
 	return (
 		<>
-			<h1>DeckList</h1>
-			<DeckView />
+			{decks.map((deck) => (
+				<DeckView deck={deck} />
+			))}
 		</>
 	);
 }
