@@ -51,7 +51,7 @@ function EditDeck() {
 		async function editDeck() {
 			await updateDeck(deck);
 			history.push(`/decks/${deckId}`);
-			// Force reload so edit will appear if you click 'Home' breadrcumb
+			// Force reload so edit will appear if you click 'Home' breadcrumb
 			window.location.reload();
 		}
 		editDeck();

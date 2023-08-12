@@ -14,7 +14,7 @@ import NotFound from "./NotFound";
 function Layout() {
 	const history = useHistory();
 
-	// Individual deck state - 'Deck', 'Study', 'Add Card'
+	// Individual deck state - 'Deck', 'Study', 'Add Card', 'Edit Card'
 	const [deck, setDeck] = useState({});
 
 	// Cards within a deck state - 'Deck',
@@ -75,7 +75,7 @@ function Layout() {
 						<CreateDeck />
 					</Route>
 					<Route path={"/decks/:deckId/cards/:cardId/edit"}>
-						<EditCard />
+						<EditCard deck={deck} setDeck={setDeck} />
 					</Route>
 					<Route path={"/decks/:deckId/cards/new"}>
 						<AddCard deck={deck} setDeck={setDeck} />
