@@ -6,9 +6,9 @@ import Home from "../Home/Home";
 import EditCard from "../ModifyCard/EditCard";
 import AddCard from "../ModifyCard/AddCard";
 import Study from "../Study/Study";
-import EditDeck from "../decks/ModifyDeck/EditDeck";
+import EditDeck from "../ModifyDeck/EditDeck";
 import Deck from "../Deck/Deck";
-import CreateDeck from "../decks/ModifyDeck/CreateDeck";
+import CreateDeck from "../ModifyDeck/CreateDeck";
 import NotFound from "./NotFound";
 
 function Layout() {

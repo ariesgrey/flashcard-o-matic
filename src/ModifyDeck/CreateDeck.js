@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-import { createDeck } from "../../utils/api";
-import Breadcrumb from "../../Layout/Breadcrumb";
+import { createDeck } from "../utils/api";
+import Breadcrumb from "../Layout/Breadcrumb";
 import DeckForm from "./DeckForm";
 
 function CreateDeck() {
