@@ -44,6 +44,9 @@ function CreateDeck() {
 		addDeck();
 	};
 
+	// Link for cancel button (different for edit vs create usage)
+	const cancelLink = "/";
+
 	return (
 		<>
 			<Breadcrumb crumbs={crumbs} links={links} />
@@ -54,6 +57,7 @@ function CreateDeck() {
 				formData={formData}
 				handleChange={handleChange}
 				handleSubmit={handleSubmit}
+				cancelLink={cancelLink}
 			/>
 		</>
 	);

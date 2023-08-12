@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-function DeckForm({ formData, handleChange, handleSubmit }) {
+function DeckForm({ formData, handleChange, handleSubmit, cancelLink }) {
 	return (
 		<div className="container bg-light border border-secondary-subtle rounded p-3">
 			<form name="deckForm" onSubmit={handleSubmit}>
@@ -35,7 +35,7 @@ function DeckForm({ formData, handleChange, handleSubmit }) {
 					/>
 				</div>
 				<div>
-					<Link to={"/"}>
+					<Link to={cancelLink}>
 						<button className="btn btn-secondary me-2" type="button">
 							Cancel
 						</button>

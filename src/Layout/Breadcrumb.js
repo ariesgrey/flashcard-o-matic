@@ -27,7 +27,7 @@ function Breadcrumb({ crumbs, links }) {
 								);
 							} else {
 								return (
-									<li className="breadcrumb-item fw-semibold">
+									<li key={index} className="breadcrumb-item fw-semibold">
 										<Link style={{ textDecoration: "none" }} to={links[index]}>
 											{crumb}
 										</Link>
