@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 function DeckForm({ formData, handleChange, handleSubmit, cancelLink }) {
 	return (
-		<div className="container bg-light border border-secondary-subtle rounded p-3">
+		<div className="container bg-light border border-secondary-subtle rounded p-3 mb-5">
 			<form name="deckForm" onSubmit={handleSubmit}>
 				<div className="mb-3">
 					<label htmlFor="name" className="form-label">
@@ -41,7 +41,7 @@ function DeckForm({ formData, handleChange, handleSubmit, cancelLink }) {
 						</button>
 					</Link>
 					<button className="btn btn-primary" type="submit">
-						Submit
+						Submit&nbsp;<i className="bi bi-box-arrow-in-right"></i>
 					</button>
 				</div>
 			</form>

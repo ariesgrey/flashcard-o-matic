@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 
 function CardView({ card, handleDeleteCard }) {
-	const { cardId, front, back, deckId } = card;
+	const { id, front, back, deckId } = card;
 
 	return (
 		<li className="list-group-item list-group-item-light border border-secondary-subtle p-0">
@@ -17,20 +17,20 @@ function CardView({ card, handleDeleteCard }) {
 							</div>
 						</div>
 					</div>
-					<div className="float-end">
+					<div className="">
 						<Link
 							className="card-link"
-							to={`/decks/${deckId}/cards/${cardId}/edit`}>
+							to={`/decks/${deckId}/cards/${id}/edit`}>
 							<button type="button" className="btn btn-secondary">
 								<i className="bi bi-pencil-square"></i>&nbsp;Edit
 							</button>
 						</Link>
 						<button
 							type="button"
-							className="card-link btn btn-danger"
-							id={cardId}
+							className="btn btn-danger card-link float-end"
+							id={id}
 							onClick={handleDeleteCard}>
-							<i className="bi bi-trash3" id={cardId}></i>
+							<i className="bi bi-trash3" id={id}></i>
 						</button>
 					</div>
 				</div>
