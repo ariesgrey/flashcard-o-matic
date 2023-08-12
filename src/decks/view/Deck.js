@@ -14,7 +14,7 @@ function Deck({
 }) {
 	const { deckId } = useParams();
 
-	// Breadcrumb params
+	// Breadcrumb props
 	const crumbs = [deck.name];
 	const links = [];
 
@@ -39,17 +39,19 @@ function Deck({
 
 	// Add cards from deck to 'cards' once deck is loaded
 	useEffect(() => {
+		setCards([]);
+
 		if (deck) {
 			setCards(deck.cards);
 		}
-	}, [deck, cards, setCards]);
+	}, [deck, setCards]);
 
 	return (
 		<>
 			<Breadcrumb crumbs={crumbs} links={links} />
-			<div className="card position-relative my-3">
+			<div className="card position-relative my-2 border border-0">
 				<div className="card-body">
-					<h3 className="card-title fw-normal">{deck.name}</h3>
+					<h3 className="card-title">{deck.name}</h3>
 					<p className="card-text fs-5">{deck.description}</p>
 					<div>
 						<Link className="card-link" to={`/decks/${deckId}/edit`}>
@@ -77,6 +79,13 @@ function Deck({
 					</div>
 				</div>
 			</div>
+			<hr
+				style={{
+					height: "6px",
+					borderTop: "2px solid black",
+					borderBottom: "2px solid black",
+				}}
+			/>
 			<div className="my-3">
 				<h1>Cards</h1>
 			</div>
