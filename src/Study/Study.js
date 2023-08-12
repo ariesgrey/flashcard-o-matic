@@ -44,11 +44,8 @@ function Study({ deck, setDeck, cards, setCards }) {
 		<>
 			<Breadcrumb crumbs={crumbs} links={links} />
 			<h1 className="my-3">Study: {deck.name}</h1>
-			{cards && cards.length > 3 ? (
-				<StudyCards cards={cards} />
-			) : (
-				<NotEnoughCards />
-			)}
+			{cards && cards.length > 3 && <StudyCards cards={cards} />}
+			{cards && <NotEnoughCards cards={cards} deckId={deckId} />}
 		</>
 	);
 }
