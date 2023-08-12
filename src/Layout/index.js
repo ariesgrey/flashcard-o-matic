@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
 import { listDecks, deleteDeck, deleteCard } from "../utils/api";
 import Header from "./Header";
-import Home from "../home/Home";
-import EditCard from "../cards/EditCard";
-import AddCard from "../cards/AddCard";
-import Study from "../decks/study/Study";
-import EditDeck from "../decks/modify/EditDeck";
-import Deck from "../decks/view/Deck";
-import CreateDeck from "../decks/modify/CreateDeck";
+import Home from "../Home/Home";
+import EditCard from "../ModifyCard/EditCard";
+import AddCard from "../ModifyCard/AddCard";
+import Study from "../Study/Study";
+import EditDeck from "../decks/ModifyDeck/EditDeck";
+import Deck from "../Deck/Deck";
+import CreateDeck from "../decks/ModifyDeck/CreateDeck";
 import NotFound from "./NotFound";
 
 function Layout() {
@@ -84,7 +84,12 @@ function Layout() {
 						<EditDeck />
 					</Route>
 					<Route path={"/decks/:deckId/study"}>
-						<Study />
+						<Study
+							deck={deck}
+							setDeck={setDeck}
+							cards={cards}
+							setCards={setCards}
+						/>
 					</Route>
 					<Route path={"/decks/:deckId"}>
 						<Deck

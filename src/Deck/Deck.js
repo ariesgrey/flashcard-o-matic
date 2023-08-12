@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import Breadcrumb from "../../Layout/Breadcrumb";
+import Breadcrumb from "../Layout/Breadcrumb";
 import CardList from "./CardList";
-import { readDeck } from "../../utils/api";
+import { readDeck } from "../utils/api";
 
 function Deck({
 	deck,
