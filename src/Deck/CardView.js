@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 
 function CardView({ card, handleDeleteCard }) {
@@ -9,7 +10,7 @@ function CardView({ card, handleDeleteCard }) {
 				<div className="card-body">
 					<div className="card-text">
 						<div className="row row-cols-2">
-							<div className="col">
+							<div className="col border-end">
 								<p className="text-body-secondary">{front}</p>
 							</div>
 							<div className="col">

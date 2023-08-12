@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import NotEnoughCards from "./NotEnoughCards";
 import StudyCards from "./StudyCards";
@@ -44,8 +44,10 @@ function Study({ deck, setDeck, cards, setCards }) {
 		<>
 			<Breadcrumb crumbs={crumbs} links={links} />
 			<h1 className="my-3">Study: {deck.name}</h1>
-			{cards && cards.length > 3 && <StudyCards cards={cards} />}
-			{cards && <NotEnoughCards cards={cards} deckId={deckId} />}
+			{cards && cards.length > 2 && <StudyCards cards={cards} />}
+			{cards && cards.length < 3 && (
+				<NotEnoughCards cards={cards} deckId={deckId} />
+			)}
 		</>
 	);
 }

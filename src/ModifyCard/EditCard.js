@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { readDeck, readCard, updateCard } from "../utils/api";
 import Breadcrumb from "../Layout/Breadcrumb";

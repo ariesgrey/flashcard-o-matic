@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import Breadcrumb from "../Layout/Breadcrumb";
 import CardList from "./CardList";
