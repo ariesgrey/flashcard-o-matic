@@ -1,20 +1,32 @@
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { createDeck } from "../../utils/api";
 import Breadcrumb from "../../Layout/Breadcrumb";
 import DeckForm from "./DeckForm";
 
-function CreateDeck({ formData, setFormData, handleChange }) {
+function CreateDeck() {
+	const history = useHistory();
+
+	// Breadcrumb props
 	const crumbs = ["Create Deck"];
 	const links = [];
 
-	const history = useHistory();
-
-	const initialFormState = {
+	// DeckForm state set-up
+	const initialFormData = {
 		name: "",
 		description: "",
 	};
-	setFormData(initialFormState);
+	const [formData, setFormData] = useState({ ...initialFormData });
 
+	// DeckForm change handler
+	const handleChange = ({ target }) => {
+		setFormData({
+			...formData,
+			[target.name]: target.value,
+		});
+	};
+
+	// DeckForm submit handler for new deck
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		async function addDeck() {

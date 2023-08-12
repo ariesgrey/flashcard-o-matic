@@ -1,21 +1,27 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useParams, useHistory } from "react-router-dom";
 import { readDeck, updateDeck } from "../../utils/api";
 import Breadcrumb from "../../Layout/Breadcrumb";
 import DeckForm from "./DeckForm";
 
-function EditDeck({ deck, setDeck, formData, setFormData, handleChange }) {
+function EditDeck() {
 	const { deckId } = useParams();
 	const history = useHistory();
 
+	// DeckForm/deck state set-up
+	const initialFormData = {
+		name: "",
+		description: "",
+	};
+	const [deck, setDeck] = useState({ ...initialFormData });
+
+	// Load deck
 	useEffect(() => {
-		setDeck({});
 		const abortController = new AbortController();
 
 		async function loadDeck() {
 			try {
 				const loadedDeck = await readDeck(deckId);
-				console.log(loadedDeck);
 				setDeck(loadedDeck);
 			} catch (error) {
 				if (error.name !== "AbortError") {
@@ -27,33 +33,26 @@ function EditDeck({ deck, setDeck, formData, setFormData, handleChange }) {
 		return () => abortController.abort();
 	}, [deckId, setDeck]);
 
+	// Breadcrumb props
 	const crumbs = [deck.name, "Edit Deck"];
 	const links = [`/decks/${deckId}`];
 
-	const initialFormState = {
-		name: deck.name,
-		description: deck.description,
-	};
-	setFormData(initialFormState);
-
-	const handleSubmit = (event) => {
-		event.preventDefault();
-		// Check if this works or if formData needs to be split up
+	// DeckForm change handler
+	const handleChange = ({ target }) => {
 		setDeck({
 			...deck,
-			formData,
+			[target.name]: target.value,
 		});
+	};
+
+	// DeckForm submit handler for editing existing deck
+	const handleSubmit = (event) => {
+		event.preventDefault();
 		async function editDeck() {
-			try {
-				await updateDeck(deck);
-				history.push(`/decks/${deckId}`);
-				//Check if force reload needed
-				//window.location.reload();
-			} catch (error) {
-				if (error.name !== "AbortError") {
-					throw error;
-				}
-			}
+			await updateDeck(deck);
+			history.push(`/decks/${deckId}`);
+			// Force reload so edit will appear if you click 'Home' breadrcumb
+			window.location.reload();
 		}
 		editDeck();
 	};
@@ -65,7 +64,7 @@ function EditDeck({ deck, setDeck, formData, setFormData, handleChange }) {
 				<h1>Edit Deck</h1>
 			</div>
 			<DeckForm
-				formData={formData}
+				formData={deck}
 				handleChange={handleChange}
 				handleSubmit={handleSubmit}
 			/>

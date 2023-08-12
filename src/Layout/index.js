@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Route, Switch, useHistory } from "react-router-dom";
-import { listDecks, deleteDeck } from "../utils/api";
+import { listDecks, deleteDeck, deleteCard } from "../utils/api";
 import Header from "./Header";
 import Home from "../home/Home";
 import EditCard from "../cards/EditCard";
@@ -14,7 +14,7 @@ import NotFound from "./NotFound";
 function Layout() {
 	const history = useHistory();
 
-	// Individual deck state - 'Deck', 'EditDeck'
+	// Individual deck state - 'Deck'
 	const [deck, setDeck] = useState({});
 
 	// Cards within a deck state - 'Deck',
@@ -40,22 +40,12 @@ function Layout() {
 		return () => abortController.abort();
 	}, []);
 
-	// Change handler for deckForm - 'CreateDeck', 'EditDeck'
-	// May be able to also use for cardForm? Otherwise need to rename
-	const [formData, setFormData] = useState([]);
-	const handleChange = ({ target }) => {
-		setFormData({
-			...formData,
-			[target.name]: target.value,
-		});
-	};
-
 	// Delete deck handler - 'Home', 'Deck'
 	const handleDeleteDeck = async ({ target }) => {
 		const deckId = target.getAttribute("id");
-		const deleteMessage =
+		const deleteDeckMessage =
 			"Delete this deck?\nYou will not be able to recover it.";
-		if (window.confirm(deleteMessage)) {
+		if (window.confirm(deleteDeckMessage)) {
 			await deleteDeck(deckId);
 			history.push("/");
 			window.location.reload();
@@ -63,7 +53,15 @@ function Layout() {
 	};
 
 	// Delete card handler - 'Deck'
-	const handleDeleteCard = async ({ target }) => {};
+	const handleDeleteCard = async ({ target }) => {
+		const cardId = target.getAttribute("id");
+		const deleteCardMessage =
+			"Delete this card?\nYou will not be able to recover it.";
+		if (window.confirm(deleteCardMessage)) {
+			await deleteCard(cardId);
+			window.location.reload();
+		}
+	};
 
 	return (
 		<>
@@ -74,11 +72,7 @@ function Layout() {
 						<Home decks={decks} handleDeleteDeck={handleDeleteDeck} />
 					</Route>
 					<Route path={"/decks/new"}>
-						<CreateDeck
-							formData={formData}
-							setFormData={setFormData}
-							handleChange={handleChange}
-						/>
+						<CreateDeck />
 					</Route>
 					<Route path={"/decks/:deckId/cards/:cardId/edit"}>
 						<EditCard />
@@ -87,13 +81,7 @@ function Layout() {
 						<AddCard />
 					</Route>
 					<Route path={"/decks/:deckId/edit"}>
-						<EditDeck
-							deck={deck}
-							setDeck={setDeck}
-							formData={formData}
-							setFormData={setFormData}
-							handleChange={handleChange}
-						/>
+						<EditDeck />
 					</Route>
 					<Route path={"/decks/:deckId/study"}>
 						<Study />

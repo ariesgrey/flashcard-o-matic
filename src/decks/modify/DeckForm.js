@@ -41,7 +41,7 @@ function DeckForm({ formData, handleChange, handleSubmit }) {
 						</button>
 					</Link>
 					<button className="btn btn-primary" type="submit">
-						Create
+						Submit
 					</button>
 				</div>
 			</form>
