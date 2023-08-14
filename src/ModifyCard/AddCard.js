@@ -75,6 +75,7 @@ function AddCard({ deck, setDeck }) {
 				handleChange={handleChange}
 				handleSubmit={handleSubmit}
 				cancelLink={cancelLink}
+				newCard={true}
 			/>
 		</>
 	);

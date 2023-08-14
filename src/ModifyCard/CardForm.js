@@ -1,7 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function CardForm({ formData, handleChange, handleSubmit, cancelLink }) {
+function CardForm({
+	formData,
+	handleChange,
+	handleSubmit,
+	cancelLink,
+	newCard,
+}) {
 	return (
 		<div className="container bg-light border border-secondary-subtle rounded p-3 mb-5">
 			<form name="deckForm" onSubmit={handleSubmit}>
@@ -38,11 +44,11 @@ function CardForm({ formData, handleChange, handleSubmit, cancelLink }) {
 				<div>
 					<Link to={cancelLink}>
 						<button className="btn btn-secondary me-2" type="button">
-							Cancel
+							{newCard ? "Done" : "Cancel"}
 						</button>
 					</Link>
 					<button className="btn btn-primary" type="submit">
-						Submit&nbsp;<i className="bi bi-box-arrow-in-right"></i>
+						{newCard ? "Save" : "Submit"}
 					</button>
 				</div>
 			</form>
