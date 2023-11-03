@@ -3,6 +3,8 @@ A React application to be used as a studying tool, that allows users to create, 
 
 This is my first full-scale React app using React Router, and I fully enjoyed building and assembling all of the pieces together. It helped me connect all of the separate concepts I've been learning together in my head and solidify them. 
 
+**Live Site**: https://flashcard-o-matic-ad1l.onrender.com
+
 ## Provided Thinkful Instructions:
 A local school has decided to put together a flashcard application, _Flashcard-o-matic_, to help their students study online. Teachers will use this application to create decks of flashcards for the subjects they teach, and students will study the decks. The school needs you to build the application that the students and teachers will use.
 
