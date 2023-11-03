@@ -1,4 +1,9 @@
-# Flashcard-o-matic React App - Provided Thinkful Instructions:
+# Flashcard-o-matic React App
+A React application to be used as a studying tool, that allows users to create, edit, and delete decks of flashcards. Starting data for 2 decks is esablished, and users are allowed to modify decks and the cards within them, through use of REST APIs and middleware functions with repeated utilization of useEffect and useState. React Router is used for frontend routing, including conditional routing with Switch, and use of the useParams and useHistory hooks. Basic CSS styling of the app completed with Bootstrap 5.
+
+This is my first full-scale React app using React Router, and I fully enjoyed building and assembling all of the pieces together. It helped me connect all of the separate concepts I've been learning together in my head and solidify them. 
+
+## Provided Thinkful Instructions:
 A local school has decided to put together a flashcard application, _Flashcard-o-matic_, to help their students study online. Teachers will use this application to create decks of flashcards for the subjects they teach, and students will study the decks. The school needs you to build the application that the students and teachers will use.
 
 ![Flashcard-o-matic App](https://res.cloudinary.com/strive/image/upload/w_1000,h_1000,c_limit/8ad6e17b7d849280a619e4bb69c26baa-home.png)
@@ -13,7 +18,7 @@ This project is designed to test your ability to work with rendering and state m
 - Using hooks like `useState()`, `useParams()`, and `useHistory()`
 - Debugging React code through console output and using the VS Code debugger
 
-## Instructions
+### Instructions
 
 You are tasked with building a number of different screens for the users of the flashcard app, as summarized below:
 
@@ -42,7 +47,7 @@ While working on this project, you _should not_:
 - Edit any of the files outside of the `public/src/` directory.
 - Change the location of any of the existing files.
 
-## API
+### API
 
 There are two datasets that are a part of this project: `decks` and `cards`.
 
@@ -67,7 +72,7 @@ You can view all the data inside of the `data/db.json` file. Each data set can b
 }
 ```
 
-### Decks
+#### Decks
 
 Each Deck is an object with the following shape:
 ```json
@@ -79,7 +84,7 @@ Each Deck is an object with the following shape:
 ```
 A Deck represents a collection of flashcards, or simply _cards_.
 
-### Cards
+#### Cards
 
 Each card is an object with the following shape:
 ```json
@@ -92,7 +97,7 @@ Each card is an object with the following shape:
 ```
 Each card represents a flashcard with a _front_, where the question is displayed, and a _back_, where the answer can be found. A card also contains the _deckId_, which matches the card to the deck that the card belongs to.
 
-### Utility Functions
+#### Utility Functions
 
 There are several utility functions exported from `src/utils/api/index.js` that allow you to perform create, read, update, and delete operations with the API server. You will need to select and use the appropriate functions in your React components.
 
@@ -100,11 +105,11 @@ Note that the `updateDeck()`, `readDeck()`, and `listDecks()` functions call the
 
 Please read the documentation in the file for more information.
 
-## Screens
+### Screens
 
 You are tasked with creating the following screens that work with the above datasets.
 
-### Home
+#### Home
 
 The Home screen is the first page the user sees. It is displayed at `/`.
 
@@ -118,7 +123,7 @@ The Home screen has the following features:
 - Clicking the **View** button brings the user to the Deck screen.
 - Clicking the **Delete** button shows a warning message before deleting the deck.
 
-#### Delete Deck Prompt
+##### Delete Deck Prompt
 
 When the user clicks the **Delete** button, a warning message is shown and the user can click **OK** or **Cancel**. If the user clicks **OK**, the deck is deleted and the deleted deck is no longer visible on the Home screen.
 
@@ -126,7 +131,7 @@ You can use [window.confirm()](https://developer.mozilla.org/en-US/docs/Web/API/
 
 ![Delete Deck Warning Message](https://res.cloudinary.com/strive/image/upload/w_1000,h_1000,c_limit/ae0a66039ae79eee10554cc7af2fcc20-lete-deck-prompt.png)
 
-### Study
+#### Study
 
 The Study screen is displayed at `/decks/:deckId/study`.
 
@@ -144,13 +149,13 @@ The Study screen has the following features:
   - If the user does not restart the deck, they should return to the home screen.
 - Studying a deck with two or fewer cards should display a "Not enough cards" message (see the "Not enough cards" section below) and a button to add cards to the deck.
 
-#### Next Button
+##### Next Button
 
 The **Next** button appears after the card is flipped.
 
 ![Next Button](https://res.cloudinary.com/strive/image/upload/w_1000,h_1000,c_limit/5a7d4b1050a592638fc1cf0df3f10cd0-rst-card-flipped.png)
 
-#### Restart Prompt
+##### Restart Prompt
 
 When all cards are finished, a message is shown and the user is offered the opportunity to restart the deck. If the user does not restart the deck, they return to the home screen.
 
@@ -158,7 +163,7 @@ You can use [window.confirm()](https://developer.mozilla.org/en-US/docs/Web/API/
 
 ![Restart Prompt Message](https://res.cloudinary.com/strive/image/upload/w_1000,h_1000,c_limit/59f672a4dae995dd7bfeed04ab020b70-y-restart-prompt.png)
 
-#### Not Enough Cards
+##### Not Enough Cards
 
 Studying a Deck with two or fewer cards should display a "Not enough cards" message and a button to add cards to the deck.
 
@@ -166,7 +171,7 @@ Studying a Deck with two or fewer cards should display a "Not enough cards" mess
 
 Clicking the **Add Cards** button should take the user to the Add Card screen.
 
-### Create Deck
+#### Create Deck
 
 The Home screen has a **Create Deck** button that brings the user to the Create Deck screen.
 
@@ -181,7 +186,7 @@ The Create Deck screen has the following features:
 - If the user clicks **Submit**, the user is taken to the Deck screen.
 - If the user clicks **Cancel**, the user is taken to the Home screen.
 
-### Deck
+#### Deck
 
 The Deck screen displays all of the information about a deck.
 
@@ -207,7 +212,7 @@ Button Clicked | Destination
   - Has an **Edit** button that takes the user to the Edit Card screen when clicked.
   - Has a **Delete** button that allows that card to be deleted.
 
-#### Delete Card Prompt
+##### Delete Card Prompt
 
 When the user clicks the **Delete** button associated with a card, a warning message is shown and the user can click **OK** or **Cancel**. If the user clicks **OK**, the card is deleted.
 
@@ -215,7 +220,7 @@ You can use [window.confirm()](https://developer.mozilla.org/en-US/docs/Web/API/
 
 ![Delete Card Warning Message](https://res.cloudinary.com/strive/image/upload/w_1000,h_1000,c_limit/987a95a7cc4470316b38425b8cdb7c84-lete-card-prompt.png)
 
-### Edit Deck
+#### Edit Deck
 
 The Edit Deck screen allows the user to modify information on an existing deck.
 
@@ -229,7 +234,7 @@ The Edit Deck screen has the following features:
 - The user can edit and update the form.
 - If the user clicks **Cancel**, the user is taken to the Deck screen.
 
-### Add Card
+#### Add Card
 
 The Add Card screen allows the user to add a new card to an existing deck.
 
@@ -244,7 +249,7 @@ The Add Card screen has the following features:
 - If the user clicks **Save**, a new card is created and associated with the relevant deck. Then the form is cleared and the process for adding a card is restarted.
 - If the user clicks **Done**, the user is taken to the Deck screen.
 
-### Edit Card
+#### Edit Card
 
 The Edit Card screen allows the user to modify information on an existing card.
 
